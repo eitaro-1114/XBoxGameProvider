@@ -3,6 +3,7 @@ import os
 from typing import Final
 
 from discord import Client, Intents, Message
+from Domain.server import server_thread
 
 _TOKEN: Final = os.getenv("BOT_TOKEN")
 if not _TOKEN:
@@ -53,6 +54,9 @@ async def periodic_message(channel):
         await channel.send("定期メッセージです")
         await asyncio.sleep(10)  # 10秒ごとに発言
 
+
+# サーバースレッドの起動
+server_thread()
 
 # Botの起動とDiscordサーバーへの接続
 _client.run(_TOKEN)
