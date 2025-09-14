@@ -1,5 +1,7 @@
 import asyncio
 import os
+
+print(os.getenv("PYTHONPATH"))
 from typing import Final
 
 from discord import Client, Intents, Message
