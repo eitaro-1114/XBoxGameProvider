@@ -13,7 +13,7 @@ if not _TOKEN:
     raise ValueError("BOT_TOKEN environment variable is not set")
 
 _intents: Final = Intents.default()
-_bot: Final = commands.Bot(intents=_intents)
+_bot: Final = commands.Bot(command_prefix=None, intents=_intents)
 
 
 # サーバースレッドの起動
