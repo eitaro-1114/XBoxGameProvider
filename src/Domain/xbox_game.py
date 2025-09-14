@@ -11,6 +11,8 @@ class XboxGame:
     """ゲームのタイトル"""
     description: str
     """ゲームの説明"""
+    image_url: str
+    """ゲームの画像URL"""
 
     @staticmethod
     def create(data: dict) -> XboxGame:
@@ -28,10 +30,11 @@ class XboxGame:
             raise ValueError("ProductTitle is missing in data")
 
         description = data.get("ProductDescription", "")
-        if description is None:
-            description = ""
+        image_title = data.get("ImageTile", {})
+        image_url = image_title.get("URI", "")
 
         return XboxGame(
             title=title,
             description=description,
+            image_url=image_url,
         )
