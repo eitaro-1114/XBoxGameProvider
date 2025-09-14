@@ -19,4 +19,4 @@ COPY . /bot
 EXPOSE 8080
 
 # 実行
-CMD python Discord/main.py
+CMD python src/Discord/main.py
