@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from typing import Final, Optional
 from zoneinfo import ZoneInfo
 
-from discord import Client, Intents, Interaction, Object, TextChannel
+from discord import Client, Embed, Intents, Interaction, Object, TextChannel
 from discord.app_commands import CommandTree
 from discord.ext import tasks
 from Domain.leaving_soon_requestor import clear_cache, get_leaving_games
@@ -123,12 +123,17 @@ class XBoxGameClient(Client):
             await channel.send("まもなく終了するゲームはありません。")
             return
 
-        for game in leaving_games:
-            message = f"""
-            ## 【終了予定】{game.title}\n{game.image_url}\n```{game.description}```
-            """
+        red_color = 0xFF0000
 
-            await channel.send(message)
+        for game in leaving_games:
+            embed = Embed(
+                title=f"【終了予定】{game.title}",
+                description=game.description,
+                color=red_color,
+            )
+
+            embed.set_image(url=game.image_url)
+            await channel.send(embed=embed)
 
             # Discordのレート制限を避けるために少し待機
             await asyncio.sleep(1)
