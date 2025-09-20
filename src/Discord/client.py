@@ -114,8 +114,13 @@ class XBoxGameClient(Client):
 
             await interaction.response.send_message("キャッシュをクリアしました。")
 
-    async def __send_leaving_soon_games(self, channel: TextChannel, use_cache: bool = True) -> None:
+    async def __send_leaving_soon_games(
+        self, channel: TextChannel, interaction: Interaction, use_cache: bool = True
+    ) -> None:
         """まもなく終了するゲームの情報を取得して指定したチャンネルに送信する。"""
+
+        # 処理中のリアクションを返す
+        await interaction.response.defer(thinking=True)
 
         leaving_games = get_leaving_games(use_cache=use_cache)
 
